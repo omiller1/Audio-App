@@ -47,6 +47,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    AVAudioSession* audioSession = [AVAudioSession sharedInstance];
+    NSError* err = nil;
+    [audioSession setCategory:AVAudioSessionCategoryPlayback error:&err];
+    if (err){
+        NSLog(@"audioSession: %@ %ld %@", [err domain], [err code], [[err userInfo] description]);
+        return;
+    }
+    err = nil;
+    [audioSession setActive:YES error:&err];
+    if(err){
+        NSLog(@"audioSession: %@ %ld %@", [err domain], [err code], [[err userInfo] description]);
+    }
+    NSLog(@"Hello Table View!");
+
 }
 
 - (void)didReceiveMemoryWarning {
